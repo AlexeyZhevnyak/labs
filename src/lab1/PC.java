@@ -1,3 +1,5 @@
+package lab1;
+
 public class PC {
     private int id;
     private String cpu;
@@ -52,4 +54,6 @@ public class PC {
         this.ram = ram;
         this.motherboard = motherboard;
     }
+
+
 }

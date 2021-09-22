@@ -1,7 +1,15 @@
+package lab1;
+
 public class Employee {
     private int id;
     private String fio;
     private String position;
+
+    public Employee(int id, String fio, String position) {
+        this.id = id;
+        this.fio = fio;
+        this.position = position;
+    }
 
     public int getId() {
         return id;

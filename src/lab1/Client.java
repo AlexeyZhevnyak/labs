@@ -1,16 +1,16 @@
+package lab1;
+
 import java.sql.Date;
 
 public class Client {
     private int id;
     private String fio;
-    private int age;
     private String address;
     private Date birthday;
 
-    public Client(int id, String fio, int age, String address, Date birthday) {
+    public Client(int id, String fio, String address, Date birthday) {
         this.id = id;
         this.fio = fio;
-        this.age = age;
         this.address = address;
         this.birthday = birthday;
     }
@@ -29,14 +29,6 @@ public class Client {
 
     public void setFio(String fio) {
         this.fio = fio;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public String getAddress() {

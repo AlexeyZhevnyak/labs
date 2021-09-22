@@ -1,3 +1,5 @@
+package lab1;
+
 public class SubscriptionType {
     private int id;
     private String name;
