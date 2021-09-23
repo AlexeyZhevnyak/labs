@@ -4,15 +4,25 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Runner {
     public static void main(String[] args) throws FileNotFoundException {
-//        VisitLog[] logs = consoleInput();
-        VisitLog[] logs = randomInput();
-//        VisitLog[] logs = fileInput();
-        output(logs);
+////        VisitLog[] logs = consoleInput();
+//        VisitLog[] logs = randomInput();
+////        VisitLog[] logs = fileInput();
+//        Formatter title = new Formatter().format("%20s  %20s  %20s  %40s  %20s", "Код посещения",
+//                "Тип абонемента",
+//                "Код ПК",
+//                "ФИО сотрудника",
+//                "Дата посещения");
+//        System.out.println(title);
+////        Arrays.sort(logs, Comparator.comparing(o -> o.getDate().toString()));
+//        Arrays.sort(logs, Comparator.comparing(a -> SubscriptionBuyings.map.get(a.getIdSubscriptionBuy()).getSubscriptionType().getName()));
+//        output(logs);
+        Scanner scanner = new Scanner(new File("src/lab1/logs.xml"));
+        while (scanner.hasNextLine())
+            System.out.println(scanner.nextLine());
     }
 
     static VisitLog[] consoleInput() {
@@ -43,7 +53,6 @@ public class Runner {
     static VisitLog[] randomInput() {
         int n = (int) (Math.random() * 11);
         VisitLog[] logs = new VisitLog[n];
-
         for (int i = 0; i < n; i++) {
             Date.valueOf(LocalDate.now());
             LocalDate now = LocalDate.now();

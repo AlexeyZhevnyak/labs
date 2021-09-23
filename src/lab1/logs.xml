@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<logs>
+    <log>
+        <idBuy>0</idBuy>
+        <idPC>0</idPC>
+        <idEmployee>0</idEmployee>
+        <date>05-05-2020</date>
+    </log>
+    <log>
+        <idBuy>0</idBuy>
+        <idPC>0</idPC>
+        <idEmployee>0</idEmployee>
+        <date>07-07-2020</date>
+    </log>
+</logs>
