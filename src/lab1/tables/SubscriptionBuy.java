@@ -1,26 +1,20 @@
-package lab1;
+package lab1.tables;
+
+import lab1.AbstractTable;
 
 import java.sql.Date;
+import java.util.Formatter;
 
-public class SubscriptionBuy {
-    private int id;
+public class SubscriptionBuy extends AbstractTable {
     private SubscriptionType subscriptionType;
     private Client client;
     private Date date;
 
     public SubscriptionBuy(int id, SubscriptionType subscriptionType, Client client, Date date) {
-        this.id = id;
+        setId(id);
         this.subscriptionType = subscriptionType;
         this.client = client;
         this.date = date;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public SubscriptionType getSubscriptionType() {
@@ -45,5 +39,14 @@ public class SubscriptionBuy {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public String getEntryView() {
+        return new Formatter().format("%20d  %20s  %20s %20s",
+                getId(),
+                subscriptionType.getName(),
+                client.getFio(),
+                date.toString()).toString();
     }
 }

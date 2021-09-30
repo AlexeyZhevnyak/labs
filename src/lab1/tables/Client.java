@@ -1,26 +1,20 @@
-package lab1;
+package lab1.tables;
+
+import lab1.AbstractTable;
 
 import java.sql.Date;
+import java.util.Formatter;
 
-public class Client {
-    private int id;
+public class Client extends AbstractTable {
     private String fio;
     private String address;
     private Date birthday;
 
     public Client(int id, String fio, String address, Date birthday) {
-        this.id = id;
+        setId(id);
         this.fio = fio;
         this.address = address;
         this.birthday = birthday;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFio() {
@@ -45,5 +39,10 @@ public class Client {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    @Override
+    public String getEntryView() {
+        return new Formatter().format("%20d  %20s  %20s  %20s", getId(), fio, address, birthday.toString()).toString();
     }
 }

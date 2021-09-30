@@ -1,22 +1,17 @@
-package lab1;
+package lab1.tables;
 
-public class Employee {
-    private int id;
+import lab1.AbstractTable;
+
+import java.util.Formatter;
+
+public class Employee extends AbstractTable {
     private String fio;
     private String position;
 
     public Employee(int id, String fio, String position) {
-        this.id = id;
+        setId(id);
         this.fio = fio;
         this.position = position;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFio() {
@@ -33,5 +28,10 @@ public class Employee {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    @Override
+    public String getEntryView() {
+        return new Formatter().format("%20d  %20s  %20s", getId(), fio, position).toString();
     }
 }

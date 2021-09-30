@@ -4,12 +4,24 @@
         <idBuy>0</idBuy>
         <idPC>0</idPC>
         <idEmployee>0</idEmployee>
-        <date>05-05-2020</date>
+        <date>2020-08-09</date>
+    </log>
+    <log>
+        <idBuy>1</idBuy>
+        <idPC>1</idPC>
+        <idEmployee>1</idEmployee>
+        <date>2020-07-07</date>
     </log>
     <log>
         <idBuy>0</idBuy>
-        <idPC>0</idPC>
-        <idEmployee>0</idEmployee>
-        <date>07-07-2020</date>
+        <idPC>1</idPC>
+        <idEmployee>2</idEmployee>
+        <date>2019-09-09</date>
+    </log>
+    <log>
+        <idBuy>1</idBuy>
+        <idPC>2</idPC>
+        <idEmployee>3</idEmployee>
+        <date>2020-08-01</date>
     </log>
 </logs>
