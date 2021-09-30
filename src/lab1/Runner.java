@@ -5,24 +5,24 @@ import java.io.FileNotFoundException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Runner {
     public static void main(String[] args) throws FileNotFoundException {
-////        VisitLog[] logs = consoleInput();
-//        VisitLog[] logs = randomInput();
-////        VisitLog[] logs = fileInput();
-//        Formatter title = new Formatter().format("%20s  %20s  %20s  %40s  %20s", "Код посещения",
-//                "Тип абонемента",
-//                "Код ПК",
-//                "ФИО сотрудника",
-//                "Дата посещения");
-//        System.out.println(title);
-////        Arrays.sort(logs, Comparator.comparing(o -> o.getDate().toString()));
-//        Arrays.sort(logs, Comparator.comparing(a -> SubscriptionBuyings.map.get(a.getIdSubscriptionBuy()).getSubscriptionType().getName()));
-//        output(logs);
-        Scanner scanner = new Scanner(new File("src/lab1/logs.xml"));
-        while (scanner.hasNextLine())
-            System.out.println(scanner.nextLine());
+//        VisitLog[] logs = consoleInput();
+        VisitLog[] logs = randomInput();
+//        VisitLog[] logs = fileInput("src/logs.txt");
+//        VisitLog[] logs = xmlInput("src/logs.xml");
+        Formatter title = new Formatter().format("%20s  %20s  %20s  %40s  %20s", "Код посещения",
+                "Тип абонемента",
+                "Код ПК",
+                "ФИО сотрудника",
+                "Дата посещения");
+        System.out.println(title);
+
+        Arrays.sort(logs, Comparator.comparing(a -> SubscriptionBuyings.map.get(a.getIdSubscriptionBuy()).getSubscriptionType().getName()));
+        output(logs);
     }
 
     static VisitLog[] consoleInput() {
@@ -88,6 +88,40 @@ public class Runner {
                     Integer.parseInt(lines[1]),
                     Integer.parseInt(lines[2]),
                     Date.valueOf(lines[3])
+            );
+        }
+        return logs;
+    }
+
+    static VisitLog[] xmlInput(String filePath) throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File(filePath));
+        StringBuilder content = new StringBuilder();
+        while (scanner.hasNextLine())
+            content.append(scanner.nextLine()).append('\n');
+
+        String regex = "(?<=<.{1,10}>)(.*)(?=</.*>)";
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(content);
+
+        int count = (int) matcher.results()
+                .count();
+        VisitLog[] logs = new VisitLog[count / 4];
+        int i = 0;
+        matcher.reset();
+        while (matcher.find()) {
+            int idBuy = Integer.parseInt(matcher.group());
+            matcher.find();
+            int idPC = Integer.parseInt(matcher.group());
+            matcher.find();
+            int idEmployee = Integer.parseInt(matcher.group());
+            matcher.find();
+            final String group = matcher.group();
+            Date date = Date.valueOf(group);
+            logs[i] = new VisitLog(i++,
+                    idBuy,
+                    idPC,
+                    idEmployee,
+                    date
             );
         }
         return logs;
