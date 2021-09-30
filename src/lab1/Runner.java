@@ -21,7 +21,18 @@ public class Runner {
                 "Дата посещения");
         System.out.println(title);
 
-        Arrays.sort(logs, Comparator.comparing(a -> SubscriptionBuyings.map.get(a.getIdSubscriptionBuy()).getSubscriptionType().getName()));
+        Arrays.sort(logs, (a, b) -> {
+            int t1 = a.getIdSubscriptionBuy() - b.getIdSubscriptionBuy();
+            if (t1 == 0) {
+
+                int t2 = a.getIdPc() - b.getIdPc();
+                if (t2 == 0)
+                    return a.getIdEmployee() - b.getIdEmployee();
+
+                return t2;
+            }
+            return t1;
+        });
         output(logs);
     }
 
