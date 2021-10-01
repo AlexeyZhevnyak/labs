@@ -65,7 +65,6 @@ public class Runner {
         int n = (int) (Math.random() * 11);
         VisitLog[] logs = new VisitLog[n];
         for (int i = 0; i < n; i++) {
-            Date.valueOf(LocalDate.now());
             LocalDate now = LocalDate.now();
             now = now.minusWeeks((long) (Math.random() * 100));
 
