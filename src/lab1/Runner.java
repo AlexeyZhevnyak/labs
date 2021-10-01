@@ -1,6 +1,7 @@
 package lab1;
 
 import lab1.factories.VisitLogConsoleFactory;
+import lab1.factories.VisitLogFileFactory;
 import lab1.factories.VisitLogRandomFactory;
 import lab1.tables.VisitLog;
 
