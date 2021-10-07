@@ -1,6 +1,7 @@
 package lab1.tables;
 
 import lab1.AbstractTable;
+import lab1.ITable;
 import lab1.holders.EmployeeHolder;
 import lab1.holders.PcHolder;
 import lab1.holders.SubscriptionBuyHolder;
@@ -79,5 +80,20 @@ public class VisitLog extends AbstractTable {
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj);
+    }
+
+    @Override
+    public int compareTo(ITable o) {
+        VisitLog visitLog = (VisitLog) o;
+        int t1 = this.idSubscriptionBuy - visitLog.idSubscriptionBuy;
+        if (t1 == 0) {
+
+            int t2 = this.idPc - visitLog.idPc;
+            if (t2 == 0)
+                return this.idEmployee - visitLog.idEmployee;
+
+            return t2;
+        }
+        return t1;
     }
 }

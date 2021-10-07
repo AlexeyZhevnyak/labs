@@ -7,6 +7,8 @@ import lab1.tables.VisitLog;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +21,7 @@ public class VisitLogXMLFactory implements AbstractVisitLogFactory {
     }
 
     @Override
-    public VisitLog[] input() {
+    public List<VisitLog> input() {
         try {
             Scanner scanner = new Scanner(new File(filePath));
             StringBuilder content = new StringBuilder();
@@ -32,7 +34,7 @@ public class VisitLogXMLFactory implements AbstractVisitLogFactory {
 
             int count = (int) matcher.results()
                     .count();
-            VisitLog[] logs = new VisitLog[count / 4];
+            List<VisitLog> logs = new ArrayList<>();
             int i = 0;
             matcher.reset();
             while (matcher.find()) {
@@ -44,12 +46,12 @@ public class VisitLogXMLFactory implements AbstractVisitLogFactory {
                 matcher.find();
                 final String group = matcher.group();
                 Date date = Date.valueOf(group);
-                logs[i] = new VisitLog(i++,
+                logs.add(new VisitLog(i++,
                         idBuy,
                         idPC,
                         idEmployee,
                         date
-                );
+                ));
             }
             return logs;
         } catch (FileNotFoundException e) {

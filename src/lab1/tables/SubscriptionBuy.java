@@ -1,6 +1,7 @@
 package lab1.tables;
 
 import lab1.AbstractTable;
+import lab1.ITable;
 
 import java.sql.Date;
 import java.util.Formatter;
@@ -48,5 +49,20 @@ public class SubscriptionBuy extends AbstractTable {
                 subscriptionType.getName(),
                 client.getFio(),
                 date.toString()).toString();
+    }
+
+    @Override
+    public int compareTo(ITable o) {
+        SubscriptionBuy subscriptionBuy = (SubscriptionBuy) o;
+        int t1 = this.date.compareTo(subscriptionBuy.date);
+        if (t1 == 0) {
+
+            int t2 = this.client.compareTo(subscriptionBuy.client);
+            if (t2 == 0)
+                return this.subscriptionType.compareTo(subscriptionBuy.subscriptionType);
+
+            return t2;
+        }
+        return t1;
     }
 }

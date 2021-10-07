@@ -1,11 +1,17 @@
 package lab1.tables;
 
 import lab1.AbstractTable;
+import lab1.ITable;
 
-import java.io.Serializable;
 import java.util.Formatter;
 
-public class PC extends AbstractTable{
+public class PC extends AbstractTable {
+
+    private String cpu;
+    private String gpu;
+    private int ram;
+    private String motherboard;
+    private int number;
 
     public PC(int id, String cpu, String gpu, int ram, String motherboard, int number) {
         setId(id);
@@ -15,12 +21,6 @@ public class PC extends AbstractTable{
         setMotherboard(motherboard);
         setNumber(number);
     }
-
-    private String cpu;
-    private String gpu;
-    private int ram;
-    private String motherboard;
-    private int number;
 
     public int getNumber() {
         return number;
@@ -68,4 +68,18 @@ public class PC extends AbstractTable{
         return new Formatter().format("%20d  %20s  %20s %20d %20s %20s", getId(), cpu, gpu, ram, motherboard, number).toString();
     }
 
+    @Override
+    public int compareTo(ITable o) {
+        PC pc = (PC) o;
+        int t1 = this.number - pc.number;
+        if (t1 == 0) {
+
+            int t2 = this.ram - pc.ram;
+            if (t2 == 0)
+                return this.cpu.compareTo(pc.cpu);
+
+            return t2;
+        }
+        return t1;
+    }
 }

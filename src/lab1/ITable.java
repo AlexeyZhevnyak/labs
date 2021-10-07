@@ -1,5 +1,5 @@
 package lab1;
 
-public interface ITable {
+public interface ITable extends Comparable<ITable> {
     String getEntryView();
 }

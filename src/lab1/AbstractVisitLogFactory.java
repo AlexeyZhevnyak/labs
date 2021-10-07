@@ -2,6 +2,8 @@ package lab1;
 
 import lab1.tables.VisitLog;
 
+import java.util.List;
+
 public interface AbstractVisitLogFactory {
-    VisitLog[] input();
+    List<VisitLog> input();
 }
