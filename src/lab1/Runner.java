@@ -3,10 +3,7 @@ package lab1;
 import lab1.factories.VisitLogRandomFactory;
 import lab1.tables.VisitLog;
 
-import java.util.Collections;
-import java.util.Formatter;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 //"src/lab1/logs.xml"
 //"src/lab1/logs.txt"
@@ -20,19 +17,19 @@ public class Runner {
                 "ФИО сотрудника",
                 "Дата посещения");
         System.out.println(title);
-//        Arrays.sort(logs, (a, b) -> {
-//            int t1 = a.getIdSubscriptionBuy() - b.getIdSubscriptionBuy();
-//            if (t1 == 0) {
-//
-//                int t2 = a.getIdPc() - b.getIdPc();
-//                if (t2 == 0)
-//                    return a.getIdEmployee() - b.getIdEmployee();
-//
-//                return t2;
-//            }
-//            return t1;
-//        });
-        Collections.sort(logs);
+        logs.sort((a, b) -> {
+            int t1 = a.getIdSubscriptionBuy() - b.getIdSubscriptionBuy();
+            if (t1 == 0) {
+
+                int t2 = a.getIdEmployee() - b.getIdEmployee();
+                if (t2 == 0)
+                    return a.getIdPc() - b.getIdPc();
+
+                return t2;
+            }
+            return t1;
+        });
+//        Collections.sort(logs);
         output(logs);
     }
 
