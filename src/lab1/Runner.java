@@ -1,41 +1,37 @@
 package lab1;
 
-import lab1.factories.VisitLogRandomFactory;
-import lab1.tables.VisitLog;
+import lab1.threads.RandomThread;
+import lab1.threads.TxtThread;
+import lab1.threads.XMLThread;
 
-import java.util.*;
+import java.util.Formatter;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 //"src/lab1/logs.xml"
 //"src/lab1/logs.txt"
 public class Runner {
     public static void main(String[] args) {
-        AbstractVisitLogFactory visitLogFactory = new VisitLogRandomFactory();
-        List<VisitLog> logs = visitLogFactory.input();
+        Buffer buffer = new Buffer();
+        Runnable randomThread = new RandomThread(buffer);
+        Runnable txtThread = new TxtThread(buffer, "src/lab1/logs.txt");
+        Runnable xmlThread = new XMLThread(buffer, "src/lab1/logs.xml");
+//        AbstractVisitLogFactory visitLogFactory = new VisitLogRandomFactory();
+//        List<VisitLog> logs = visitLogFactory.input();
         Formatter title = new Formatter().format("%20s  %20s  %20s  %40s  %20s", "Код посещения",
                 "Тип абонемента",
                 "Инвентарный номер ПК",
                 "ФИО сотрудника",
                 "Дата посещения");
         System.out.println(title);
-        logs.sort((a, b) -> {
-            int t1 = a.getIdSubscriptionBuy() - b.getIdSubscriptionBuy();
-            if (t1 == 0) {
-
-                int t2 = a.getIdEmployee() - b.getIdEmployee();
-                if (t2 == 0)
-                    return a.getIdPc() - b.getIdPc();
-
-                return t2;
-            }
-            return t1;
-        });
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+        executorService.execute(randomThread);
+        executorService.execute(txtThread);
+        executorService.execute(xmlThread);
+        buffer.print();
+        executorService.shutdown();
 //        Collections.sort(logs);
-        output(logs);
+//        logs.forEach(System.out::println);
     }
 
-    static void output(List<VisitLog> logs) {
-        Iterator<VisitLog> iterator = logs.iterator();
-        while (iterator.hasNext())
-            System.out.println(iterator.next());
-    }
 }

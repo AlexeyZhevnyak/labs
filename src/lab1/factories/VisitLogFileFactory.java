@@ -47,9 +47,6 @@ public class VisitLogFileFactory implements AbstractVisitLogFactory {
                 }
             }
             logs.removeIf(Objects::nonNull);
-//            logs = Arrays.stream(logs)
-//                    .filter(Objects::nonNull)
-//                    .toArray(VisitLog[]::new);
             return logs;
         } catch (FileNotFoundException e) {
             throw new InputException(e);
