@@ -48,12 +48,23 @@ public class XMLThread implements Runnable {
                 final String group = matcher.group();
                 Date date = Date.valueOf(group);
 
-                buffer.add(new Message("xml", new VisitLog(i++,
+//                buffer.add(new Message("xml", new VisitLog(i++,
+//                        idBuy,
+//                        idPC,
+//                        idEmployee,
+//                        date
+//                )));
+                System.out.println(new Message("xml", new VisitLog(i++,
                         idBuy,
                         idPC,
                         idEmployee,
                         date
                 )));
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
             buffer.incStopCount();
         } catch (FileNotFoundException e) {

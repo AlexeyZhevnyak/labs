@@ -23,12 +23,23 @@ public class RandomThread implements Runnable {
         for (int i = 0; i < n; i++) {
             LocalDate now = LocalDate.now();
             now = now.minusWeeks((long) (Math.random() * 100));
-            buffer.add(new Message("random", new VisitLog(i,
+//            buffer.add(new Message("random", new VisitLog(i,
+//                    (int) (Math.random() * SubscriptionBuyHolder.map.size()),
+//                    (int) (Math.random() * PcHolder.map.size()),
+//                    (int) (Math.random() * EmployeeHolder.map.size()),
+//                    Date.valueOf(now))));
+            System.out.println(new Message("random", new VisitLog(i,
                     (int) (Math.random() * SubscriptionBuyHolder.map.size()),
                     (int) (Math.random() * PcHolder.map.size()),
                     (int) (Math.random() * EmployeeHolder.map.size()),
                     Date.valueOf(now))));
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         buffer.incStopCount();
+
     }
 }

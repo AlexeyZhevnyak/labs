@@ -36,13 +36,25 @@ public class TxtThread implements Runnable {
             scanner = new Scanner(new File(filePath));
             for (int i = 0; i < n; i++) {
                 String[] lines = scanner.nextLine().split(";");
-                buffer.add(new Message("txt", new VisitLog(
+//                buffer.add(new Message("txt", new VisitLog(
+//                        i,
+//                        Integer.parseInt(lines[0]),
+//                        Integer.parseInt(lines[1]),
+//                        Integer.parseInt(lines[2]),
+//                        Date.valueOf(lines[3])
+//                )));
+                System.out.println(new Message("txt", new VisitLog(
                         i,
                         Integer.parseInt(lines[0]),
                         Integer.parseInt(lines[1]),
                         Integer.parseInt(lines[2]),
                         Date.valueOf(lines[3])
                 )));
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
             }
         } catch (FileNotFoundException e) {

@@ -7,6 +7,7 @@ import lab1.threads.XMLThread;
 import java.util.Formatter;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 //"src/lab1/logs.xml"
 //"src/lab1/logs.txt"
@@ -16,8 +17,7 @@ public class Runner {
         Runnable randomThread = new RandomThread(buffer);
         Runnable txtThread = new TxtThread(buffer, "src/lab1/logs.txt");
         Runnable xmlThread = new XMLThread(buffer, "src/lab1/logs.xml");
-//        AbstractVisitLogFactory visitLogFactory = new VisitLogRandomFactory();
-//        List<VisitLog> logs = visitLogFactory.input();
+
         Formatter title = new Formatter().format("%20s  %20s  %20s  %40s  %20s", "Код посещения",
                 "Тип абонемента",
                 "Инвентарный номер ПК",
@@ -28,10 +28,8 @@ public class Runner {
         executorService.execute(randomThread);
         executorService.execute(txtThread);
         executorService.execute(xmlThread);
-        buffer.print();
+//        buffer.print();
         executorService.shutdown();
-//        Collections.sort(logs);
-//        logs.forEach(System.out::println);
     }
 
 }
