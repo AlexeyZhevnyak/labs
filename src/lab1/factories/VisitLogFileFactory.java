@@ -46,7 +46,7 @@ public class VisitLogFileFactory implements AbstractVisitLogFactory {
                     System.err.println(e.getMessage());
                 }
             }
-            logs.removeIf(Objects::nonNull);
+            logs.removeIf(Objects::isNull);
 //            logs = Arrays.stream(logs)
 //                    .filter(Objects::nonNull)
 //                    .toArray(VisitLog[]::new);

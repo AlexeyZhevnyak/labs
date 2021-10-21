@@ -1,5 +1,7 @@
 package lab1;
 
-public interface ITable extends Comparable<ITable> {
+import java.io.Serializable;
+
+public interface ITable extends Comparable<ITable>, Serializable {
     String getEntryView();
 }
