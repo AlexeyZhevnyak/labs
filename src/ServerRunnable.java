@@ -22,13 +22,13 @@ public class ServerRunnable implements Runnable {
         try (ObjectOutputStream out = new ObjectOutputStream(clientDialog.getOutputStream());
              ObjectInputStream in = new ObjectInputStream(clientDialog.getInputStream())) {
             File file = (File) in.readObject();
+            System.out.println("get file - " + file.getName());
             String filePath = file.getPath();
             String ext;
 
             if (filePath.lastIndexOf(".") != -1 && filePath.lastIndexOf(".") != 0)
                 ext = filePath.substring(filePath.lastIndexOf(".") + 1);
             else ext = "";
-            System.out.println(ext);
             FileExtensions fileExtension = FileExtensions.valueOf(ext.toUpperCase());
             AbstractVisitLogFactory factory = fileExtension.getFactory(filePath);
             List<VisitLog> logs = factory.input();

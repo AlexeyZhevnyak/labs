@@ -9,12 +9,11 @@ public class Server {
 
     public static void main(String[] args) {
         try (ServerSocket server = new ServerSocket(3345)) {
-
+            System.out.println("Server start");
             while (!server.isClosed()) {
                 Socket client = server.accept();
                 executeIt.execute(new ServerRunnable(client));
             }
-
             executeIt.shutdown();
         } catch (IOException e) {
             e.printStackTrace();

@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.concurrent.Semaphore;
 
-public class ClientTxtRunnable implements Runnable {
+public class ClientRunnable implements Runnable {
     private Socket socket;
     private final String filePath;
     private static final Semaphore SEMAPHORE = new Semaphore(1);
 
-    public ClientTxtRunnable(String filePath) {
+    public ClientRunnable(String filePath) {
         this.filePath = filePath;
         try {
 
@@ -30,6 +30,9 @@ public class ClientTxtRunnable implements Runnable {
         try (ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
              ObjectInputStream ois = new ObjectInputStream(socket.getInputStream())) {
 
+            File file = new File(filePath);
+            oos.writeObject(file);
+            ArrayList<VisitLog> visitLogs = (ArrayList<VisitLog>) ois.readObject();
             SEMAPHORE.acquire();
             Formatter title = new Formatter().format("%20s  %20s  %20s  %40s  %20s", "Код посещения",
                     "Тип абонемента",
@@ -37,10 +40,6 @@ public class ClientTxtRunnable implements Runnable {
                     "ФИО сотрудника",
                     "Дата посещения");
             System.out.println(title);
-
-            File file = new File(filePath);
-            oos.writeObject(file);
-            ArrayList<VisitLog> visitLogs = (ArrayList<VisitLog>) ois.readObject();
             visitLogs.forEach(System.out::println);
             System.out.println("---------------------------");
             SEMAPHORE.release();
