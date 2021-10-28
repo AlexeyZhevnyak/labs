@@ -3,7 +3,6 @@ package service;
 import lab1.AbstractVisitLogFactory;
 import lab1.factories.VisitLogFileFactory;
 import lab1.factories.VisitLogXMLFactory;
-
 import java.util.function.Function;
 
 public enum FileExtensions {
